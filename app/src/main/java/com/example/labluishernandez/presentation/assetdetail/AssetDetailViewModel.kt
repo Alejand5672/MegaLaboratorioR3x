@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.labluishernandez.domain.repository.CryptoRepositoryImpl
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AssetDetailViewModel(
@@ -26,6 +27,9 @@ class AssetDetailViewModel(
     private fun loadAsset() {
         viewModelScope.launch {
             state = state.copy(isLoading = true, error = null)
+
+            delay(2000)
+
             val result = repository.getAssetById(assetId)
 
             val asset = result.asset
