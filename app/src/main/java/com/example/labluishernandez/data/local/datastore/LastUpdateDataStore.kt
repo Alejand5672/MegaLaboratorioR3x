@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.firstOrNull
 
 
-// Extension para el Context
 val Context.cryptoPrefsDataStore by preferencesDataStore(name = "crypto_prefs")
 
 class LastUpdateDataStore(

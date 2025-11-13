@@ -15,7 +15,6 @@ class AssetListViewModel(
 
     private val repository = CryptoRepositoryImpl(application)
 
-    // ✅ ahora es estado observable para Compose
     var state by mutableStateOf(AssetListState())
         private set
 

@@ -1,5 +1,6 @@
 package com.example.labluishernandez.data.network
 
+import com.example.labluishernandez.data.network.dto.AssetDetailResponseDto
 import com.example.labluishernandez.data.network.dto.AssetDto
 import com.example.labluishernandez.data.network.dto.AssetsResponseDto
 import io.ktor.client.call.body
@@ -20,7 +21,7 @@ class CoinCapApiImpl(
     }
 
     override suspend fun getAssetById(id: String): AssetDto {
-        val response: AssetsResponseDto = client.get("assets/$id").body()
-        return response.data.first()
+        val response: AssetDetailResponseDto = client.get("assets/$id").body()
+        return response.data
     }
 }

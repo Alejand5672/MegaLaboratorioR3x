@@ -21,3 +21,8 @@ data class AssetDto(
 data class AssetsResponseDto(
     val data: List<AssetDto>
 )
+
+@Serializable
+data class AssetDetailResponseDto(
+    val data: AssetDto
+)

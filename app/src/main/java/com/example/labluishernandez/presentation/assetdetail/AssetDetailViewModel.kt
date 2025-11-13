@@ -16,7 +16,6 @@ class AssetDetailViewModel(
 
     private val repository = CryptoRepositoryImpl(application)
 
-    // ✅ también observable
     var state by mutableStateOf(AssetDetailState())
         private set
 
