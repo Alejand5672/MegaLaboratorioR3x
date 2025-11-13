@@ -1,3 +1,7 @@
+//Luis Alejandro Hernández Márquez (241424)
+// Programación de plataformas moviles
+// prof: Juan Carlos Durini
+
 package com.example.labluishernandez.data.local.datastore
 
 import android.content.Context
