@@ -56,6 +56,16 @@ class CryptoRepositoryImpl(
         }
     }
 
+    override suspend fun getAssetListFromLocal(): AssetListResult {
+        val local = dao.getAll().map { it.toDomain() }
+        val lastUpdate = lastUpdateDataStore.lastUpdateFlow.firstOrNull()
+        return AssetListResult(
+            assets = local,
+            isFromRemote = false,
+            lastUpdateText = lastUpdate
+        )
+    }
+
     override suspend fun getAssetById(id: String): AssetDetailResult {
         return try {
             val dto = api.getAssetById(id)
@@ -94,7 +104,6 @@ class CryptoRepositoryImpl(
         lastUpdateDataStore.saveLastUpdate(now)
     }
 
-    // Mappers
     private fun AssetEntity.toDomain() = Asset(
         id = id,
         name = name,

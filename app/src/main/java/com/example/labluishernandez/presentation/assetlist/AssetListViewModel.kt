@@ -28,7 +28,11 @@ class AssetListViewModel(
 
     fun onSaveOfflineClicked() {
         viewModelScope.launch {
-            repository.saveAssetsOffline(state.assets)
+            if (state.assets.isNotEmpty()) {
+                repository.saveAssetsOffline(state.assets)
+            }
+
+            loadAssetsFromLocal()
         }
     }
 
@@ -60,5 +64,30 @@ class AssetListViewModel(
             }
         }
     }
-}
 
+    private fun loadAssetsFromLocal() {
+        viewModelScope.launch {
+            state = state.copy(isLoading = true, error = null)
+            val result = repository.getAssetListFromLocal()
+
+            if (result.assets.isEmpty()) {
+                state = state.copy(
+                    isLoading = false,
+                    error = "No hay datos guardados offline.",
+                    assets = emptyList(),
+                    originLabel = null
+                )
+            } else {
+                val label = result.lastUpdateText?.let { "Viendo data del $it" }
+                    ?: "Viendo data guardada offline"
+
+                state = state.copy(
+                    isLoading = false,
+                    error = null,
+                    assets = result.assets,
+                    originLabel = label
+                )
+            }
+        }
+    }
+}

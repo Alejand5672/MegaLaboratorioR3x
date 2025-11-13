@@ -16,6 +16,7 @@ data class AssetDetailResult(
 
 interface CryptoRepository {
     suspend fun getAssetList(): AssetListResult
+    suspend fun getAssetListFromLocal(): AssetListResult
     suspend fun getAssetById(id: String): AssetDetailResult
     suspend fun saveAssetsOffline(assets: List<Asset>)
 }
